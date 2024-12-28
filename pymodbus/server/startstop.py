@@ -5,7 +5,6 @@ import asyncio
 import os
 
 from pymodbus.datastore import ModbusServerContext
-from pymodbus.pdu import ModbusPDU
 
 from .base import ModbusBaseServer
 from .server import (
@@ -18,13 +17,11 @@ from .server import (
 
 async def StartAsyncTcpServer(  # pylint: disable=invalid-name
     context: ModbusServerContext,
-    custom_functions: list[type[ModbusPDU]] | None = None,
     **kwargs,
 ) -> None:
     """Start and run a tcp modbus server.
 
     :parameter context: Datastore object
-    :parameter custom_functions: optional list of custom PDU objects
     :parameter kwargs: for parameter explanation see ModbusTcpServer
 
     .. tip::
@@ -32,18 +29,16 @@ async def StartAsyncTcpServer(  # pylint: disable=invalid-name
 
         Use ModbusTcpServer to allow multiple servers in one app.
     """
-    await ModbusTcpServer(context, custom_pdu=custom_functions, **kwargs).serve_forever()
+    await ModbusTcpServer(context, **kwargs).serve_forever()
 
 
 def StartTcpServer(  # pylint: disable=invalid-name
     context: ModbusServerContext,
-    custom_functions: list[type[ModbusPDU]] | None = None,
     **kwargs
 ) -> None:
     """Start and run a modbus TCP server.
 
     :parameter context: Datastore object
-    :parameter custom_functions: optional list of custom PDU objects
     :parameter kwargs: for parameter explanation see ModbusTcpServer
 
     .. tip::
@@ -51,18 +46,16 @@ def StartTcpServer(  # pylint: disable=invalid-name
 
         Use ModbusTcpServer to allow multiple servers in one app.
     """
-    asyncio.run(StartAsyncTcpServer(context, custom_functions=custom_functions, **kwargs))
+    asyncio.run(StartAsyncTcpServer(context, **kwargs))
 
 
 async def StartAsyncTlsServer(  # pylint: disable=invalid-name
     context: ModbusServerContext,
-    custom_functions: list[type[ModbusPDU]] | None = None,
     **kwargs,
 ) -> None:
     """Start and run a tls modbus server.
 
     :parameter context: Datastore object
-    :parameter custom_functions: optional list of custom PDU objects
     :parameter kwargs: for parameter explanation see ModbusTlsServer
 
     .. tip::
@@ -70,18 +63,16 @@ async def StartAsyncTlsServer(  # pylint: disable=invalid-name
 
         Use ModbusTlsServer to allow multiple servers in one app.
     """
-    await ModbusTlsServer(context, custom_pdu=custom_functions, **kwargs).serve_forever()
+    await ModbusTlsServer(context, **kwargs).serve_forever()
 
 
 def StartTlsServer(  # pylint: disable=invalid-name
     context: ModbusServerContext,
-    custom_functions: list[type[ModbusPDU]] | None = None,
     **kwargs
 ) -> None:
     """Start and run a modbus TLS server.
 
     :parameter context: Datastore object
-    :parameter custom_functions: optional list of custom PDU objects
     :parameter kwargs: for parameter explanation see ModbusTlsServer
 
     .. tip::
@@ -89,18 +80,16 @@ def StartTlsServer(  # pylint: disable=invalid-name
 
         Use ModbusTlsServer to allow multiple servers in one app.
     """
-    asyncio.run(StartAsyncTlsServer(context, custom_functions=custom_functions, **kwargs))
+    asyncio.run(StartAsyncTlsServer(context, **kwargs))
 
 
 async def StartAsyncUdpServer(  # pylint: disable=invalid-name
     context: ModbusServerContext,
-    custom_functions: list[type[ModbusPDU]] | None = None,
     **kwargs,
 ) -> None:
     """Start and run a udp modbus server.
 
     :parameter context: Datastore object
-    :parameter custom_functions: optional list of custom PDU objects
     :parameter kwargs: for parameter explanation see ModbusUdpServer
 
     .. tip::
@@ -108,18 +97,16 @@ async def StartAsyncUdpServer(  # pylint: disable=invalid-name
 
         Use ModbusUdpServer to allow multiple servers in one app.
     """
-    await ModbusUdpServer(context, custom_pdu=custom_functions, **kwargs).serve_forever()
+    await ModbusUdpServer(context, **kwargs).serve_forever()
 
 
 def StartUdpServer(  # pylint: disable=invalid-name
     context: ModbusServerContext,
-    custom_functions: list[type[ModbusPDU]] | None = None,
     **kwargs
 ) -> None:
     """Start and run a modbus UDP server.
 
     :parameter context: Datastore object
-    :parameter custom_functions: optional list of custom PDU objects
     :parameter kwargs: for parameter explanation see ModbusUdpServer
 
     .. tip::
@@ -127,18 +114,16 @@ def StartUdpServer(  # pylint: disable=invalid-name
 
         Use ModbusUdpServer to allow multiple servers in one app.
     """
-    asyncio.run(StartAsyncUdpServer(context, custom_functions=custom_functions, **kwargs))
+    asyncio.run(StartAsyncUdpServer(context, **kwargs))
 
 
 async def StartAsyncSerialServer(  # pylint: disable=invalid-name
     context: ModbusServerContext,
-    custom_functions: list[type[ModbusPDU]] | None = None,
     **kwargs,
 ) -> None:
     """Start and run a serial modbus server.
 
     :parameter context: Datastore object
-    :parameter custom_functions: optional list of custom PDU objects
     :parameter kwargs: for parameter explanation see ModbusSerialServer
 
     .. tip::
@@ -146,18 +131,16 @@ async def StartAsyncSerialServer(  # pylint: disable=invalid-name
 
         Use ModbusSerialServer to allow multiple servers in one app.
     """
-    await ModbusSerialServer(context, custom_pdu=custom_functions, **kwargs).serve_forever()
+    await ModbusSerialServer(context, **kwargs).serve_forever()
 
 
 def StartSerialServer(  # pylint: disable=invalid-name
     context: ModbusServerContext,
-    custom_functions: list[type[ModbusPDU]] | None = None,
     **kwargs
 ) -> None:
     """Start and run a modbus serial server.
 
     :parameter context: Datastore object
-    :parameter custom_functions: optional list of custom PDU objects
     :parameter kwargs: for parameter explanation see ModbusSerialServer
 
     .. tip::
@@ -165,7 +148,7 @@ def StartSerialServer(  # pylint: disable=invalid-name
 
         Use ModbusSerialServer to allow multiple servers in one app.
     """
-    asyncio.run(StartAsyncSerialServer(context, custom_functions=custom_functions, **kwargs))
+    asyncio.run(StartAsyncSerialServer(context, **kwargs))
 
 
 async def ServerAsyncStop() -> None:  # pylint: disable=invalid-name
